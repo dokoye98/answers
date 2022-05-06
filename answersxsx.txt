@@ -1,0 +1,39 @@
+1)SELECT first_name,last_name FROM actor;
+2)SELECT last_name FROM actor WHERE first_name = 'John';
+3)SELECT * FROM actor WHERE last_name = 'Neeson';
+4)SELECT * FROM actor WHERE actor_id LIKE '%0';
+5) SELECT description FROM film_text WHERE film_id  = 100;
+6)SELECT title FROM film WHERE rating = 'R!';
+7)SELECT title FROM film WHERE rating = !'R';
+ 8)SELECT title,length FROM film ORDER BY length ASC LIMIT 10;
+9)SELECT title,MAX(length) FROM film;
+ 10)SELECT title FROM film WHERE special_features ='Deleted Scenes';
+
+
+13) SELECT actor_info.first_name, actor_info.last_name
+FROM actor_info
+Join film_actor
+ON actor_info.actor_id=film_actor.actor_id
+GROUP BY actor_info.actor_id
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
+15)SELECT AVG(length) FROM film;
+16)SELECT category.name, COUNT(name) FROM category JOIN film_category ON film_category.category_id=category.category_id JOIN film ON film.film_id=film_category.film_id GROUP BY category.category_id;
+
+
+18)SELECT COUNT(title) FROM film WHERE release_year =2006;
+ 19)SELECT film.title FROM film JOIN film_category ON film.film_id = film_category.film_id JOIN category ON film_category.category_id = category.category_id WHERE category.name ='Horror';
+20)SELECT first_name,last_name FROM staff WHERE staff_id= 2;
+21)SELECT title FROM film JOIN film_actor ON film.film_id = film_actor.film_id JOIN actor ON film_actor.actor_id =actor.actor_id WHERE actor.first_name = 'Fred' AND actor.last_name = 'Costner';
+CREATE VIEW special_country AS SELECT DISTINCT(country) FROM country;
+SELECT COUNT(*) FROM special_country;
+SELECT name FROM language ORDER BY name DESC;
+SELECT category.name, COUNT(name) FROM category JOIN film_category ON film_category.category_id=category.category_id Join film ON film.film_id=film_category.film_id GROUP BY category.category_id ORDER BY COUNT(name) desc LIMIT 1;
+SELECT title FROM movies WHERE release_date BETWEEN '1983-01-01' AND '1993-01-01' ORDER BY release_date DESC;
+2* cheat  SELECT movies.title, AVG(ratings.rating) FROM movies JOIN ratings ON movies.id =ratings.id WHERE ratings.rating = 1 GROUP BY title  ORDER BY rating ASC;
+ 
+5)SELECT genres.name, COUNT(movies.id) FROM genres
+JOIN genres_movies ON genres_movies.genre_id=genres.id
+JOIN movies ON movies.id=genres_movies.movie_id
+GROUP BY genres.name ORDER BY COUNT(movies.id) ASC;
